@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
-        start.findViewById(R.id.start);
-        stop.findViewById(R.id.stop);
-        reset.findViewById(R.id.reset);
-        zapisz.findViewById(R.id.zapisz);
+        start = findViewById(R.id.start);
+        stop = findViewById(R.id.stop);
+        reset = findViewById(R.id.reset);
+        zapisz = findViewById(R.id.zapisz);
         Handler handler = new Handler();
         start.setOnClickListener(
                 new View.OnClickListener() {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         if (czyIdzie) {
                             ileSekund++;
-                            textView.setText("" + ileSekund);
+                            textView.setText(zwrocLadnyCzas((ileSekund)));
                         }
                         handler.postDelayed(this,1000);
 
@@ -63,5 +63,11 @@ public class MainActivity extends AppCompatActivity {
         );
 
 
+    }
+    private String zwrocLadnyCzas(int ileSekund){
+        int sekundy = ileSekund%60;
+        int minuty = (ileSekund/60)%60;
+        int godziny = ileSekund/3600;
+        return String.format("%02d:%02d:%02d",godziny,minuty,sekundy);
     }
 }
